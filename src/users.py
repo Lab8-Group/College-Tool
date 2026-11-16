@@ -1,10 +1,7 @@
-from flask import Flask
 from secure import Hashing
 from secure import Verifier
 from flask_sqlalchemy import SQLAlchemy
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///example.sqlite"
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 
 class Student(db.Model):
@@ -76,33 +73,6 @@ class Course(db.Model):
        return f"{self.enrolled_count}/{self.max}"
 
 
-with app.app_context():
-    
-    db.create_all()
-
-    
-    if not Course.query.first():
-        
-        initial_courses = [
-            Course(name="CSE 100", time=1000, teacher="Dr. Smith", max=12),
-            Course(name="CSE 108", time=1300, teacher="Prof. Jones", max=12),
-            Course(name="WRI 120", time=1500, teacher="Dr. Lee", max=12),
-        ]
-        
-        # 4. Stage and commit to disk
-        db.session.add_all(initial_courses)
-        db.session.commit()
-
-    if not Student.query.first():
-            
-            initial_students = [
-                Student(name="Johnny Test", grade=95.0, hash_password = Hashing("Zebra")),
-                Student(name="Dog Test", grade=82.5, hash_password = Hashing("Meow")),
-                Student(name="Rebecca", grade=78.0,  hash_password = Hashing("Wings")),
-            ]
-            # 4. Stage and commit to disk
-            db.session.add_all(initial_students)
-            db.session.commit()
 
 
 
