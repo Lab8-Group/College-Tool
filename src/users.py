@@ -29,7 +29,7 @@ class Teacher(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String, unique=True, nullable=False)
    hash_password = db.Column(db.String(255), nullable = False)
-   courses = db.Column(db.String, nullable=False)
+   courses = db.relationship("Course", backref="instructor", lazy=True)
 
    #def __repr__(self):
     #return f"<Student {self.id!r}, {self.name!r}: {self.grade!r} >"
@@ -53,12 +53,13 @@ class Admin(db.Model):
     #return f"<Student {self.id!r}, {self.name!r}: {self.grade!r} >"
 
 enrollments = db.Table('enrollments',db.Column('student_id', db.Integer, db.ForeignKey('student.id'), primary_key=True), db.Column('course_id', db.Integer, db.ForeignKey('course.id'), primary_key=True))
+
 class Course(db.Model):
    id =  db.Column(db.Integer, primary_key =True)
    name = db.Column(db.String, unique = True, nullable = False)
    max = db.Column(db.Integer, nullable = False)
    time = db.Column(db.Integer, nullable = False)
-   teacher = db.Column(db.String, nullable = False)
+   teacher = db.Column(db.Integer, db.ForeignKey("teacher.id"), nullable=False)
 
    students = db.relationship('Student', secondary=enrollments, backref='courses')
 
