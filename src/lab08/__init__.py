@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, render_template, request, jsonify, foreignkey
 from flask_sqlalchemy import SQLAlchemy
 
 # Load variables from .env file into os.environ
