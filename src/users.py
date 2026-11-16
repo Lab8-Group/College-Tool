@@ -32,12 +32,13 @@ class Teacher(db.Model):
 
    def set_password(self, user_password: str):
         self.hash_password = Hashing(user_password)
+        
 class Admin(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String, unique=True, nullable=False)
    hash_password = db.Column(db.String(255), nullable = False)
 
-   def set_password(self, user_password: str):
+def set_password(self, user_password: str):
        self.hash_password = Hashing(user_password)
    #def __repr__(self):
     #return f"<Student {self.id!r}, {self.name!r}: {self.grade!r} >"

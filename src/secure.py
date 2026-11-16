@@ -7,7 +7,7 @@ load_dotenv()
 
 PEPPER = os.environ['PASSWORD_PEPPER']
 if not PEPPER:
-    raise RuntimeError("PASSWORD_PEPPER is missing from your .env file")
+    raise RuntimeError("PASSWORD_PEPPER is missing from your .env")
 
 hidden = PasswordHasher(memory_cost=65536, time_cost=4, parallelism=3)
 
