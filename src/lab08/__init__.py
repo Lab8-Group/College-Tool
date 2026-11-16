@@ -57,16 +57,44 @@ with app.app_context():
             db.session.commit()
 
 
-'''
+
 # Define your routes
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-@app.route("/health")
-def health():
-    return jsonify({"status": "healthy"}), 200
+#@app.route("/health")
+#def health():
+#    return jsonify({"status": "healthy"}), 200
+
+@app.route('/grades', methods=['GET', 'POST'])
+def handle_grades():
+    if request.method == 'GET':
+        students = Student.query.all()
+        return jsonify({s.name: s.grade for s in students}), 200
+
+    if request.method == 'POST':
+        data = request.get_json()
+        if not data or 'name' not in data or 'grade' not in data:
+            return jsonify({"error": "Missing name or grade"}), 400
+
+
+    name = data['name']
+    grade = data['grade']
+    password = data['hash_password']
+    
+    existing_student = Student.query.filter_by(name=name).first()
+    if existing_student:
+        return jsonify({"error": "Student already exists"}), 400
+
+    
+    new_student = Student(name = name, grade = grade, password = password)
+
+    db.session.add(new_student)
+    db.session.commit()
+    return jsonify({name: grade}), 201
+
 
 
 def main():
@@ -77,4 +105,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    '''
+    
