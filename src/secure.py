@@ -1,0 +1,20 @@
+import os
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
+
+PEPPER = os.environ['PASSWORD_PEPPER']
+hidden = PasswordHasher(memory_cost=65536, time_cost=4, parallelism=3)
+
+def Hashing(password: str) -> str:
+    peppered = f"{password}{PEPPER}"
+    return hidden.hash(peppered)
+
+
+
+def Verifier(stored_hash: str, password: str) -> bool:
+    try:
+        peppered = f"{password}{PEPPER}"
+        hidden.verify(stored_hash, peppered)
+        return True
+    except VerifyMismatchError:
+        return False
