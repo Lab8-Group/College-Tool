@@ -37,93 +37,6 @@ const BASE_URL = ""
 }
 */
 
-async function getAllStudents() {
-    
-
-    try {
-        const response = await fetch(BASE_URL);
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        
-    } catch (error) {
-        
-    }
-}
-
-
-async function getStudent(studentName) {
-    
-
-    try {
-        const response = await fetch(`${BASE_URL}/${encodeURIComponent(studentName)}`);
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-       
-    } catch (error) {
-        
-    }
-}
-
-
-/* async function createStudent(studentName, gradeValue) {
-    
-
-    try {
-        const response = await fetch(BASE_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: studentName,
-                grade: gradeValue
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        
-    } catch (error) {
-       
-    }
-} */
-
-
-async function editStudent(studentName, newGrade) {
-    
-
-    try {
-        const response = await fetch(`${BASE_URL}/${encodeURIComponent(studentName)}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                grade: newGrade
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        
-    } catch (error) {
-        
-    }
-}
 
 
 export async function unEnrollSelf(courseId) {
@@ -146,3 +59,154 @@ export async function unEnrollSelf(courseId) {
 
 
 
+export async function Login(name, password) {
+    
+        const response = await fetch(`${BASE_URL}/login`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || `HTTP Error: ${response.status}`);
+        }
+        
+     
+    return data;
+}
+
+export async function logOut() {
+    
+        const response = await fetch(`${BASE_URL}/logout`, {
+            method: "POST",
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || `HTTP Error: ${response.status}`);
+        }
+        
+     
+    return data;
+}
+
+export async function getUser() {
+    
+        const response = await fetch(`${BASE_URL}/me`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || `HTTP Error: ${response.status}`);
+        }
+        
+     
+    return data;
+}
+
+
+export async function allCourses() {
+    
+        const response = await fetch(`${BASE_URL}/courses`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || `HTTP Error: ${response.status}`);
+        }
+        
+     
+    return data;
+}
+
+export async function yourCourses() {
+    
+        const response = await fetch(`${BASE_URL}/my-courses`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || `HTTP Error: ${response.status}`);
+        }
+        
+     
+    return data;
+
+
+}
+
+export async function EnrollSelf(courseId) {
+    
+        const response = await fetch(`${BASE_URL}/courses/${courseId}/enrollment`, {
+            method: "PUT",
+            credentials:"include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || `HTTP Error: ${response.status}`);
+        }
+        
+     
+    return data;
+}
+
+
+export async function getCourseStudents(courseId) {
+    
+        const response = await fetch(`${BASE_URL}/grades/${courseId}/students`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || `HTTP Error: ${response.status}`);
+        }
+        
+     
+    return data;
+}
+
+
+
+export async function editStudent(courseId, studentId, newGrade) {
+    
+        const response = await fetch(`${BASE_URL}/grades/${courseId}/students/${studentId}/grade`, {
+            method: "PUT",
+            credentials:" include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                grade: newGrade
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || `HTTP Error: ${response.status}`);
+        }
+        
+     
+    return data;
+}
