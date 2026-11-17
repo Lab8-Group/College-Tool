@@ -2,10 +2,13 @@ import os
 from dotenv import load_dotenv
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
+from flask_jwt_extended import JWTManager 
 
 load_dotenv()
 
-PEPPER = os.environ['PASSWORD_PEPPER']
+
+jwt = JWTManager()
+PEPPER = os.getenv['PASSWORD_PEPPER']
 if not PEPPER:
     raise RuntimeError("PASSWORD_PEPPER is missing from your .env")
 
