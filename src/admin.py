@@ -10,7 +10,7 @@ from users import db, Student, Teacher, Admin, Course
 class SecureView(ModelView):
     
     column_exclude_list = ['hash_password'] 
-    form_excluded_column = ['hash_password'] 
+    form_excluded_columns = ['hash_password'] 
 
     def is_accessible(self):
         try:

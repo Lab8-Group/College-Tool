@@ -8,7 +8,7 @@ load_dotenv()
 
 
 jwt = JWTManager()
-PEPPER = os.getenv['PASSWORD_PEPPER']
+PEPPER = os.getenv('PASSWORD_PEPPER')
 if not PEPPER:
     raise RuntimeError("PASSWORD_PEPPER is missing from your .env")
 
