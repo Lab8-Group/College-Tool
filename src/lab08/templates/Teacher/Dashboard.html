@@ -11,7 +11,7 @@
     />
     <title>Teacher Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-    <!-- <script src="{{ url_for('static', filename='index.js') }}" defer></script> -->
+    <script src="{{ url_for('static', filename='teacher.js') }}" defer></script>
   </head>
   <body>
     <main class="page-shell">
@@ -58,7 +58,7 @@
   <section class="panel" aria-labelledby="roster-heading">
     <h2 id="roster-heading">Class Roster</h2>
     <h3 id="cs106-roster">CS 106 roster</h3>
-    <p>Select a class to see its students and grades.</p>
+    <p>Rosters for each class are listed below.</p>
     <!-- Student roster and inline grade editing go here -->
 <div class="table-wrap">
   <table>
@@ -72,33 +72,33 @@
     <tbody>
       <tr>
         <th scope="row">Aditya Ranganath</th>
-        <td>93</td>
+        <td class="grade-value">93</td>
         <td>
-          <button class="button button-secondary" type="button"
+          <button class="button button-secondary edit-grade" type="button"
             aria-label="Edit grade for Aditya Ranganath">Edit</button>
         </td>
       </tr>
       <tr>
         <th scope="row">Yi Wen Chen</th>
-        <td>85</td>
+        <td class="grade-value">85</td>
         <td>
-          <button class="button button-secondary" type="button"
+          <button class="button button-secondary edit-grade" type="button"
             aria-label="Edit grade for Yi Wen Chen">Edit</button>
         </td>
       </tr>
       <tr>
         <th scope="row">Nancy Little</th>
-        <td>57</td>
+        <td class="grade-value">57</td>
         <td>
-          <button class="button button-secondary" type="button"
+          <button class="button button-secondary edit-grade" type="button"
             aria-label="Edit grade for Nancy Little">Edit</button>
         </td>
       </tr>
       <tr>
         <th scope="row">Mindy Norris</th>
-        <td>68</td>
+        <td class="grade-value">68</td>
         <td>
-          <button class="button button-secondary" type="button"
+          <button class="button button-secondary edit-grade" type="button"
             aria-label="Edit grade for Mindy Norris">Edit</button>
         </td>
       </tr>
@@ -118,26 +118,26 @@
     <tbody>
       <tr>
         <th scope="row">Aditya Ranganath</th>
-        <td>99</td>
-        <td><button class="button button-secondary" type="button"
+        <td class="grade-value">99</td>
+        <td><button class="button button-secondary edit-grade" type="button"
           aria-label="Edit grade for Aditya Ranganath">Edit</button></td>
       </tr>
       <tr>
         <th scope="row">Nancy Little</th>
-        <td>87</td>
-        <td><button class="button button-secondary" type="button"
+        <td class="grade-value">87</td>
+        <td><button class="button button-secondary edit-grade" type="button"
           aria-label="Edit grade for Nancy Little">Edit</button></td>
       </tr>
       <tr>
         <th scope="row">Yi Wen Chen</th>
-        <td>92</td>
-        <td><button class="button button-secondary" type="button"
+        <td class="grade-value">92</td>
+        <td><button class="button button-secondary edit-grade" type="button"
           aria-label="Edit grade for Yi Wen Chen">Edit</button></td>
       </tr>
       <tr>
         <th scope="row">John Stuart</th>
-        <td>67</td>
-        <td><button class="button button-secondary" type="button"
+        <td class="grade-value">67</td>
+        <td><button class="button button-secondary edit-grade" type="button"
           aria-label="Edit grade for John Stuart">Edit</button></td>
       </tr>
     </tbody>
