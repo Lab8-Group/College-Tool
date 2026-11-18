@@ -5,3 +5,10 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='admin-theme.css') }}">
 {% endblock %}
+
+{% block access_control %}
+  <form action="{{ url_for('logout') }}" method="post" class="page-footer logout-form">
+    <input type="hidden" name="return_to_home" value="1">
+    <button class="btn btn-link nav-link" type="submit">Log out</button>
+  </form>
+{% endblock %}

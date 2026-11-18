@@ -16,7 +16,7 @@
     <main class="page-shell">
       <header class="page-heading">
         <div>
-          <p class="eyebrow">School Portal</p>
+          <p class="eyebrow"> WVC School Portal</p>
           <h1>Administration</h1>
           <p class="intro">Manage users, courses, and enrollments.</p>
         </div>
@@ -32,11 +32,6 @@
         <p>Use the admin console to create, view, update, and delete records.</p>
         <a class="button button-primary" href="/admin/">Open database manager</a>
       </section>
-
-      <p id="logout-status" class="status-message" role="status" aria-live="polite"></p>
-      <form id="logout-form" action="{{ url_for('logout') }}" method="post">
-        <button class="button button-secondary" type="submit">Log out</button>
-      </form>
 
       <footer class="page-footer">
         <span>Administrator access is limited to authorized accounts.</span>

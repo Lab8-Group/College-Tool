@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
 from users import db, Student, Teacher, Admin, Course, Enrollment
 from secure import jwt, Hashing, Verifier
@@ -172,9 +172,12 @@ def login():
 
 @app.route("/logout", methods=["POST"])
 def logout():
-    response = jsonify({"message": "Logged out"})
+    if request.form.get("return_to_home") == "1":
+        response = redirect("/")
+    else:
+        response = jsonify({"message": "Logged out"})
     unset_jwt_cookies(response)
-    return response, 200
+    return response
 
 
 ##Student grades 

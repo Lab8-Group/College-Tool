@@ -12,7 +12,7 @@ body {
   padding: 0.8rem 1rem;
   border: 1px solid var(--ink);
   background-color: var(--green-dark) !important;
-  box-shadow: 4px 4px 0 rgba(23, 59, 54, 0.12);
+  box-shadow: 4px 4px 0 rgba(48, 118, 136, 0.12);
 }
 
 .navbar-dark .navbar-brand,
@@ -52,21 +52,33 @@ h5 {
 }
 
 .card,
-.table-responsive,
 .form-control,
 .custom-select {
   border-color: var(--line);
 }
 
+.table-responsive {
+  border: 2px solid #5a88a7;
+}
+
+.table {
+  margin-bottom: 0;
+  border: 2px solid #5a88a7;
+}
+
+.table tbody tr {
+  background-color: #edf1e7;
+}
+
 .table thead th {
-  border-color: var(--line);
-  background-color: #a2d5db;
-  color: #40594f;
+  border: 2px solid #5a88a7;
+  background-color: #f4f8f4;
+  color: var(--ink);
 }
 
 .table td,
 .table th {
-  border-color: var(--line);
+  border: 2px solid #78a2a5;
 }
 
 .form-control:focus,
@@ -75,9 +87,24 @@ h5 {
   box-shadow: 0 0 0 3px rgba(40, 107, 85, 0.17);
 }
 
+.admin-home-welcome {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.admin-home-welcome h1 {
+  margin-bottom: 1rem;
+  font-size: 45px;
+}
+
+.admin-home-welcome p {
+  font-size: 25px;
+}
+
 @media (max-width: 680px) {
   .container,
   .container-fluid {
     padding-top: 1rem;
   }
+
 }

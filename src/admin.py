@@ -3,6 +3,7 @@ from flask_admin import Admin as FlaskAdmin
 from flask_admin.theme import Bootstrap4Theme
 from flask_admin.contrib.sqla import ModelView
 from wtforms import PasswordField
+from wtforms.validators import InputRequired
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
 from users import db, Student, Teacher, Admin, Course, Enrollment
 
@@ -29,6 +30,11 @@ class UserView(SecureView):
         "password": PasswordField("Password")  
     }
 
+    def create_form(self, obj=None):
+        form = super().create_form(obj)
+        form.password.validators = (*form.password.validators, InputRequired())
+        return form
+
     def on_model_change(self, form, model, is_created):
         if form.password.data:
             model.set_password(form.password.data)
@@ -36,11 +42,9 @@ class UserView(SecureView):
 
 def init_admin(app):
     theme = Bootstrap4Theme(base_template="admin/portal_base.html")
-    admin_panel = FlaskAdmin(app, name="School Portal", theme=theme)
+    admin_panel = FlaskAdmin(app, name="WVC School Portal", theme=theme)
     admin_panel.add_view(UserView(Student, db.session, endpoint="students"))
     admin_panel.add_view(UserView(Teacher, db.session, endpoint="teachers"))
     admin_panel.add_view(UserView(Admin, db.session, endpoint="admin_users"))
     admin_panel.add_view(SecureView(Course, db.session, endpoint="courses"))
-    admin_panel.add_view(
-        SecureView(Enrollment, db.session, name="Enrollments", endpoint="enrollments")
-    )
+    admin_panel.add_view(SecureView(Enrollment, db.session, name="Enrollments", endpoint="enrollments"))
