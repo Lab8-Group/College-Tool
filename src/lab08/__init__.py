@@ -1,9 +1,28 @@
 import os
-from dotenv import load_dotenv
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-# Load variables from .env file into os.environ
+# Load variables from .env file if python-dotenv is installed.
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    def load_dotenv():
+        env_path = os.path.join(os.path.dirname(__file__), ".env")
+        if not os.path.isfile(env_path):
+            return False
+
+        with open(env_path, encoding="utf-8") as env_file:
+            for line in env_file:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+
+                key, value = line.split("=", 1)
+                key = key.strip()
+                value = value.strip().strip("\"'")
+                os.environ.setdefault(key, value)
+        return True
+
 load_dotenv()
 
 app = Flask(__name__)
