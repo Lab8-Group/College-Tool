@@ -71,7 +71,7 @@ async function loadRoster(courseId) {
         !student ||
         !Number.isInteger(student.id) ||
         typeof student.name !== "string" ||
-        typeof student.grade !== "number"
+        (student.grade !== null && typeof student.grade !== "number")
       ) {
         throw new Error("The server returned an invalid student record.");
       }
@@ -86,7 +86,7 @@ async function loadRoster(courseId) {
       nameCell.scope = "row";
       nameCell.textContent = student.name;
       gradeCell.className = "grade-value";
-      gradeCell.textContent = String(student.grade);
+      gradeCell.textContent = student.grade === null ? "—" : String(student.grade);
       actionCell.append(
         makeButton(
           "Edit",
@@ -207,7 +207,7 @@ function startEditing(button) {
   input.max = "100";
   input.step = "any";
   input.required = true;
-  input.value = gradeCell.textContent.trim();
+  input.value = gradeCell.textContent.trim() === "—" ? "" : gradeCell.textContent.trim();
   input.dataset.originalGrade = input.value;
   input.setAttribute("aria-label", `Grade for ${studentName}`);
 
@@ -247,7 +247,7 @@ function cancelEditing(button) {
   const originalGrade = input.dataset.originalGrade;
   if (originalGrade === undefined) return;
 
-  row.querySelector(".grade-value").textContent = originalGrade;
+  row.querySelector(".grade-value").textContent = originalGrade === "" ? "—" : originalGrade;
   actionCell.replaceChildren(
     makeButton(
       "Edit",

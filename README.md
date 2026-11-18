@@ -23,5 +23,8 @@ seeds demo users and classes. Sign in as `Johnny Test` with password `Zebra`
 to view the student dashboard, or as `Dr. Stone` with password `Hello World`
 to view the teacher dashboard. Stop the server with Ctrl+C.
 
+**New Login Credential**
+Any student name in the list has the password 'student123' to view the student dashboard, as well as the admin having the password 'admin123'. Teachers will sign in with their name and password 'teacher123' to view the teacher dashboard.
+
 The environment values above are for local development only. Do not use them
 in production.

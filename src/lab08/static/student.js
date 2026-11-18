@@ -94,8 +94,8 @@ function makeCourseRow(course, action) {
   }`;
   button.dataset.courseId = String(course.id);
 
-  if (action === "full") {
-    button.textContent = "Full";
+  if (action === "full" || action === "enrolled") {
+    button.textContent = action === "full" ? "Full" : "Enrolled";
     button.disabled = true;
   } else {
     button.dataset.action = action;
@@ -121,22 +121,25 @@ function renderMyClasses(courses) {
   }
 }
 
-function renderOtherClasses(courses) {
+function renderAllClasses(courses) {
   allClassesBody.replaceChildren();
   for (const course of courses) {
     validateCourse(course, true);
   }
-  const otherCourses = courses.filter((course) => !course.enrolled);
 
-  if (otherCourses.length === 0) {
-    showTableMessage(allClassesBody, "There are no other classes offered.");
+  if (courses.length === 0) {
+    showTableMessage(allClassesBody, "No classes are offered.");
     return;
   }
 
-  for (const course of otherCourses) {
-    allClassesBody.append(
-      makeCourseRow(course, course.is_full ? "full" : "enroll"),
-    );
+  // Every class the school offers; the button shows Enrolled / Full / Sign up.
+  for (const course of courses) {
+    const action = course.enrolled
+      ? "enrolled"
+      : course.is_full
+        ? "full"
+        : "enroll";
+    allClassesBody.append(makeCourseRow(course, action));
   }
 }
 
@@ -144,7 +147,7 @@ async function loadClasses(showLoading = true) {
   if (showLoading) {
     setStatus("Loading classes…");
     showTableMessage(myClassesBody, "Loading your classes…");
-    showTableMessage(allClassesBody, "Loading other classes…");
+    showTableMessage(allClassesBody, "Loading all classes…");
   }
 
   try {
@@ -158,7 +161,7 @@ async function loadClasses(showLoading = true) {
     }
 
     renderMyClasses(myCourses);
-    renderOtherClasses(allCourses);
+    renderAllClasses(allCourses);
     if (showLoading) setStatus("");
     return true;
   } catch (error) {
@@ -170,7 +173,7 @@ async function loadClasses(showLoading = true) {
     const message =
       error instanceof Error ? error.message : "Could not load classes.";
     showTableMessage(myClassesBody, "Could not load your classes.");
-    showTableMessage(allClassesBody, "Could not load other classes.");
+    showTableMessage(allClassesBody, "Could not load all classes.");
     setStatus(message, true);
     return false;
   }
