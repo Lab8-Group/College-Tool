@@ -182,6 +182,15 @@ document.addEventListener("click", (event) => {
   }
 });
 
+function makeButton(label, buttonClass, action, studentName) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = `button ${buttonClass} ${action}`;
+  button.textContent = label;
+  button.dataset.studentName = studentName;
+  return button;
+}
+
 function startEditing(button) {
   const row = button.closest("tr");
   if (!row) return;
@@ -209,6 +218,44 @@ function startEditing(button) {
     makeButton("Cancel", "button-secondary", "cancel-grade", studentName),
   );
   input.focus();
+}
+
+function finishEditing(row, grade) {
+  const gradeCell = row.querySelector(".grade-value");
+  const actionCell = row.querySelector("td:last-child");
+  const nameCell = row.querySelector("th");
+  if (!gradeCell || !actionCell || !nameCell) return;
+
+  gradeCell.textContent = grade;
+  actionCell.replaceChildren(
+    makeButton(
+      "Edit",
+      "button-secondary",
+      "edit-grade",
+      nameCell.textContent.trim(),
+    ),
+  );
+}
+
+function cancelEditing(button) {
+  const row = button.closest("tr");
+  const input = row?.querySelector(".grade-value input");
+  const actionCell = button.closest("td");
+  const nameCell = row?.querySelector("th");
+  if (!row || !input || !actionCell || !nameCell) return;
+
+  const originalGrade = input.dataset.originalGrade;
+  if (originalGrade === undefined) return;
+
+  row.querySelector(".grade-value").textContent = originalGrade;
+  actionCell.replaceChildren(
+    makeButton(
+      "Edit",
+      "button-secondary",
+      "edit-grade",
+      nameCell.textContent.trim(),
+    ),
+  );
 }
 
 function readCookie(name) {
@@ -269,4 +316,31 @@ async function saveGrade(button) {
   } finally {
     button.disabled = false;
   }
+}
+
+const logoutForm = document.querySelector("#logout-form");
+if (logoutForm instanceof HTMLFormElement) {
+  logoutForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const status = document.querySelector("#roster-status");
+    const button = logoutForm.querySelector('button[type="submit"]');
+    if (button instanceof HTMLButtonElement) button.disabled = true;
+
+    try {
+      const response = await fetch("/logout", {
+        method: "POST",
+        credentials: "same-origin",
+      });
+      if (!response.ok) {
+        throw new Error(`Logout failed (${response.status}).`);
+      }
+      window.location.assign("/");
+    } catch (error) {
+      if (status) {
+        status.textContent =
+          error instanceof Error ? error.message : "Could not log out.";
+      }
+      if (button instanceof HTMLButtonElement) button.disabled = false;
+    }
+  });
 }

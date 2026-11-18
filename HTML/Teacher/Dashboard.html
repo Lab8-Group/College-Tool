@@ -69,8 +69,7 @@
   </table>
 </div>
         </section>
-        <form action="{{ url_for('logout') }}" method="post">
-        <!-- Include a CSRF token here when CSRF protection is set up.--> 
+        <form id="logout-form">
         <button class="button button-secondary" type="submit">Log out</button>
     </form>
     </main>

@@ -4,39 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Course Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <main>
-        <h1>Student Course Portal</h1>
+<body class="portal-login-page">
+    <main class="portal-shell">
+        <section class="portal-welcome" aria-labelledby="portal-title">
+            <div class="portal-brand">
+                <span class="portal-brand-mark" aria-hidden="true">SP</span>
+                <span class="portal-brand-name">Campus Access</span>
+            </div>
 
-        <p id="status" role="status" aria-live="polite"></p>
+            <div class="portal-welcome-copy">
+                <h1 id="portal-title">School<br><span>Portal</span></h1>
+                <p class="portal-welcome-description">
+                    Welcome to the School Portal. Sign in to view your dashboard.
+                </p>
+            </div>
 
-        <section id="login-section" aria-labelledby="login-heading">
-            <h2 id="login-heading">Log in</h2>
-            <form id="login-form">
-                <label for="student-name">Name</label>
-                <input id="student-name" name="name" type="text" autocomplete="username" required>
-
-                <label for="student-password">Password</label>
-                <input id="student-password" name="password" type="password" autocomplete="current-password" required>
-
-                <button type="submit">Log in</button>
-            </form>
+            <p class="portal-welcome-footer">Built for learning. Ready for you.</p>
         </section>
 
-        <section id="student-app" aria-label="Student courses" hidden>
-            <p>Signed in as <span id="student-name-display"></span></p>
-            <button id="logout-button" type="button">Log out</button>
+        <section id="login-section" class="portal-login" aria-labelledby="login-heading">
+            <div class="portal-login-content">
+                <p class="eyebrow">WELCOME BACK</p>
+                <h2 id="login-heading">Sign in</h2>
+                <p class="portal-login-description">
+                    Use your account to continue.
+                </p>
 
-            <section aria-labelledby="my-courses-heading">
-                <h2 id="my-courses-heading">My classes</h2>
-                <ul id="my-courses"></ul>
-            </section>
+                <p id="status" class="status-message" role="status" aria-live="polite"></p>
 
-            <section aria-labelledby="all-courses-heading">
-                <h2 id="all-courses-heading">All classes</h2>
-                <ul id="all-courses"></ul>
-            </section>
+                <form id="login-form" class="portal-login-form">
+                    <label class="field" for="student-name">
+                        Name
+                        <input id="student-name" name="name" type="text" autocomplete="username" placeholder="Your full name" required>
+                    </label>
+
+                    <label class="field" for="student-password">
+                        Password
+                        <input id="student-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+                    </label>
+
+                    <button class="button button-primary portal-submit" type="submit">Sign in</button>
+                </form>
+
+                <p class="portal-login-note">Your account gives you access to your personalized dashboard.</p>
+            </div>
         </section>
     </main>
     <script type="module" src="{{ url_for('static', filename='login.js') }}"></script>

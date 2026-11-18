@@ -19,8 +19,9 @@ uv run lab08
 ```
 
 Open http://127.0.0.1:5000/ in a browser. On a fresh local database, the app
-seeds demo users and classes. For example, sign in as `Johnny Test` with
-password `Zebra`. Stop the server with Ctrl+C.
+seeds demo users and classes. Sign in as `Johnny Test` with password `Zebra`
+to view the student dashboard, or as `Dr. Stone` with password `Hello World`
+to view the teacher dashboard. Stop the server with Ctrl+C.
 
 The environment values above are for local development only. Do not use them
 in production.

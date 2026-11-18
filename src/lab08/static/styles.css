@@ -1,5 +1,5 @@
 :root {
-  /* Reusable colors and shadows keep the gradebook's visual style consistent. */
+  /* Reusable colors and shadows keep the dashboard's visual style consistent. */
   color-scheme: light;
   --ink: #173b36;
   --muted: #60786f;
@@ -481,5 +481,178 @@ td {
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+.portal-login-page {
+  display: grid;
+  min-height: 100vh;
+  align-items: center;
+  padding: 2rem;
+}
+
+.portal-shell {
+  display: grid;
+  width: min(100%, 980px);
+  min-height: 590px;
+  grid-template-columns: 1.05fr 0.95fr;
+  margin: auto;
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  animation: arrive 380ms ease-out both;
+}
+
+.portal-welcome {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  overflow: hidden;
+  padding: clamp(2rem, 5vw, 4rem);
+  background: var(--green-pale);
+  color: var(--ink);
+}
+
+.portal-welcome::after {
+  position: absolute;
+  right: -7rem;
+  bottom: -9rem;
+  width: 22rem;
+  height: 22rem;
+  border: 1px solid rgba(23, 59, 54, 0.12);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2rem rgba(23, 59, 54, 0.035),
+    0 0 0 4rem rgba(23, 59, 54, 0.025);
+  content: "";
+  pointer-events: none;
+}
+
+.portal-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.portal-brand-mark {
+  display: grid;
+  width: 2.7rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid var(--green);
+  color: var(--green-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.9rem;
+}
+
+.portal-welcome .eyebrow {
+  color: var(--green);
+}
+
+.portal-welcome-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 25rem;
+}
+
+.portal-welcome h1 {
+  margin-bottom: 1.2rem;
+  color: var(--ink);
+  font-size: clamp(3.2rem, 7vw, 5rem);
+  line-height: 0.98;
+}
+
+.portal-welcome h1 span {
+  color: var(--green);
+}
+
+.portal-intro {
+  max-width: 24rem;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.portal-welcome-footer {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.portal-login {
+  display: grid;
+  align-items: center;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.portal-login-content {
+  width: min(100%, 25rem);
+  margin: auto;
+}
+
+.portal-login h2 {
+  margin-bottom: 0.55rem;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+}
+
+.portal-login-description {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.portal-login-form {
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 1.8rem;
+}
+
+.portal-login-form .field {
+  gap: 0.55rem;
+}
+
+.portal-login-form input {
+  min-height: 3.1rem;
+  border-color: var(--line);
+}
+
+.portal-submit {
+  width: 100%;
+  min-height: 3.1rem;
+  margin-top: 0.35rem;
+}
+
+.portal-login-note {
+  margin: 1.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 680px) {
+  .portal-login-page {
+    padding: 1rem;
+  }
+
+  .portal-shell {
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .portal-welcome {
+    min-height: 310px;
+    padding: 2rem;
+  }
+
+  .portal-login {
+    padding: 2rem;
   }
 }

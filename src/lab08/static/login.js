@@ -21,6 +21,12 @@ function setStatus(message, isError = false) {
   statusMessage.classList.toggle("error", isError);
 }
 
+function dashboardPath(role) {
+  if (role === "student") return "/student";
+  if (role === "teacher") return "/teacher";
+  return null;
+}
+
 async function request(path, options = {}) {
   const response = await fetch(path, {
     credentials: "same-origin",
@@ -63,12 +69,13 @@ async function handleLogin(event) {
     if (!user || typeof user.role !== "string") {
       throw new Error("The server returned an invalid login response.");
     }
-    if (user.role !== "student") {
-      setStatus("This page is for student accounts.", true);
+    const destination = dashboardPath(user.role);
+    if (!destination) {
+      setStatus("The admin interface is available at /admin.", true);
       return;
     }
 
-    window.location.assign("/student");
+    window.location.assign(destination);
   } catch (error) {
     setStatus(
       error instanceof Error ? error.message : "Could not log in.",
@@ -79,11 +86,12 @@ async function handleLogin(event) {
   }
 }
 
-async function restoreStudentSession() {
+async function restoreDashboardSession() {
   try {
     const user = await request("/me");
-    if (user && user.role === "student") {
-      window.location.replace("/student");
+    const destination = user && dashboardPath(user.role);
+    if (destination) {
+      window.location.replace(destination);
     }
   } catch (error) {
     if (error instanceof ApiError && error.status === 401) return;
@@ -97,4 +105,4 @@ async function restoreStudentSession() {
 }
 
 loginForm.addEventListener("submit", handleLogin);
-restoreStudentSession();
+restoreDashboardSession();

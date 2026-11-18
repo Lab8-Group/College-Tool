@@ -137,6 +137,10 @@ def index():
 def student_dashboard():
     return render_template("Student/Dashboard.html")
 
+@app.route("/teacher")
+def teacher_dashboard():
+    return render_template("Teacher/Dashboard.html")
+
 ##JWT parts
 
 @app.route("/login", methods=["POST"])
