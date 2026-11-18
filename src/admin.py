@@ -35,7 +35,7 @@ class UserView(SecureView):
 
 def init_admin(app):
     admin_panel = FlaskAdmin(app, name="University Portal")
-    admin_panel.add_view(UserView(Student, db.session))
-    admin_panel.add_view(UserView(Teacher, db.session))
-    admin_panel.add_view(UserView(Admin, db.session))
-    admin_panel.add_view(SecureView(Course, db.session))
+    admin_panel.add_view(UserView(Student, db.session, endpoint="students"))
+    admin_panel.add_view(UserView(Teacher, db.session, endpoint="teachers"))
+    admin_panel.add_view(UserView(Admin, db.session, endpoint="admin_users"))
+    admin_panel.add_view(SecureView(Course, db.session, endpoint="courses"))

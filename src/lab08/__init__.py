@@ -133,6 +133,10 @@ def find_username(name: str):
 def index():
     return render_template("index.html")
 
+@app.route("/student")
+def student_dashboard():
+    return render_template("Student/Dashboard.html")
+
 ##JWT parts
 
 @app.route("/login", methods=["POST"])

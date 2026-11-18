@@ -11,7 +11,7 @@
     />
     <title>Student Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-    <!-- <script src="{{ url_for('static', filename='index.js') }}" defer></script> -->
+    <script type="module" src="{{ url_for('static', filename='student.js') }}"></script>
   </head>
   <body>
     <main class="page-shell">
@@ -19,9 +19,9 @@
       <header class="page-heading">
         <div>
           <p class="eyebrow">Student</p>
-          <h1>Student</h1>
+          <h1><span id="student-name-display">Student</span> Dashboard</h1>
           <p class="intro">
-            View your classes, grades, and browse enrollment options.
+            View your classes and manage enrollment.
           </p>
         </div>
         <button class="button button-secondary refresh-button" id="refresh-button" type="button">
@@ -30,95 +30,58 @@
         </button>
       </header>
 
-      <!-- Collect an exact student name and show that student's grade. -->
-     <section class="panel" aria-labelledby="my-classes-heading">
-  <h2 id="my-classes-heading">My Classes</h2>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">Class</th>
-          <th scope="col">Teacher</th>
-          <th scope="col">Time</th>
-          <th scope="col">Grade</th>
-          <th scope="col">Enrolled / Capacity</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody id="my-classes-body">
-        <tr>
-          <td colspan="6" class="table-placeholder">
-            <tr>
-            <th scope="row">Math 101</th>
-            <td>Ralph Jenkins</td>
-            <td>MWF 10:00–10:50 AM</td>
-            <td>—</td>
-            <td>4 / 8</td>
-            <td>
-                <button class="button button-danger" type="button">Drop</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+      <p id="status" class="status-message" role="status" aria-live="polite"></p>
 
-<section class="panel" aria-labelledby="all-classes-heading">
-  <h2 id="all-classes-heading">All Classes</h2>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">Class</th>
-          <th scope="col">Teacher</th>
-          <th scope="col">Time</th>
-          <th scope="col">Enrolled / Capacity</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody id="all-classes-body">
-        <tr>
-          <th scope="row">Math 101</th>
-          <td>Ralph Jenkins</td>
-          <td>MWF 10:00–10:50 AM</td>
-          <td>4 / 8</td>
-          <td><button class="button button-primary" type="button">Sign up</button></td>
-        </tr>
-        <tr>
-          <th scope="row">Physics 121</th>
-          <td>Susan Walker</td>
-          <td>TR 11:00–11:50 AM</td>
-          <td>5 / 10</td>
-          <td><button class="button button-primary" type="button">Sign up</button></td>
-        </tr>
-        <tr>
-          <th scope="row">CS 106</th>
-          <td>Ammon Hepworth</td>
-          <td>MWF 2:00–2:50 PM</td>
-          <td>4 / 10</td>
-          <td><button class="button button-primary" type="button">Sign up</button></td>
-        </tr>
-        <tr>
-          <th scope="row">CS 162</th>
-          <td>Ammon Hepworth</td>
-          <td>TR 3:00–3:50 PM</td>
-          <td>4 / 4</td>
-          <td>Full</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+      <section class="panel" aria-labelledby="my-classes-heading">
+        <h2 id="my-classes-heading">My Classes</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Class</th>
+                <th scope="col">Teacher</th>
+                <th scope="col">Time</th>
+                <th scope="col">Enrolled / Capacity</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="my-classes-body">
+              <tr>
+                <td colspan="5" class="table-placeholder">Loading your classes…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-    <!--form action="{{ url_for('logout') }}" method="post">
-        <!-- Include a CSRF token here when CSRF protection is set up. 
+      <section class="panel" aria-labelledby="all-classes-heading">
+        <h2 id="all-classes-heading">Other Classes</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Class</th>
+                <th scope="col">Teacher</th>
+                <th scope="col">Time</th>
+                <th scope="col">Enrolled / Capacity</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="all-classes-body">
+              <tr>
+                <td colspan="5" class="table-placeholder">Loading classes…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <form id="logout-form">
         <button class="button button-secondary" type="submit">Log out</button>
-    </form>-->
+      </form>
 
-      <!-- Explain where changes are saved and how grades are displayed. -->
       <footer class="page-footer">
-        <span>Enrollment actions are a preview and are not connected yet.</span>
-        <span>Classes shown as returned by the service.</span>
+        <span>Class lists and enrollment changes are loaded from the server.</span>
       </footer>
     </main>
   </body>
