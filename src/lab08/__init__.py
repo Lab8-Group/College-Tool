@@ -141,6 +141,13 @@ def student_dashboard():
 def teacher_dashboard():
     return render_template("Teacher/Dashboard.html")
 
+@app.route("/admin-dashboard")
+@jwt_required()
+def admin_dashboard():
+    if get_jwt().get("role") != "admin":
+        return jsonify({"error": "Admin access required"}), 403
+    return render_template("Admin/Dashboard.html")
+
 ##JWT parts
 
 @app.route("/login", methods=["POST"])

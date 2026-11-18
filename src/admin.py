@@ -3,7 +3,7 @@ from flask_admin import Admin as FlaskAdmin
 from flask_admin.contrib.sqla import ModelView
 from wtforms import PasswordField
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
-from users import db, Student, Teacher, Admin, Course
+from users import db, Student, Teacher, Admin, Course, Enrollment
 
 
 
@@ -39,3 +39,6 @@ def init_admin(app):
     admin_panel.add_view(UserView(Teacher, db.session, endpoint="teachers"))
     admin_panel.add_view(UserView(Admin, db.session, endpoint="admin_users"))
     admin_panel.add_view(SecureView(Course, db.session, endpoint="courses"))
+    admin_panel.add_view(
+        SecureView(Enrollment, db.session, name="Enrollments", endpoint="enrollments")
+    )

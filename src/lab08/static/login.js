@@ -24,6 +24,7 @@ function setStatus(message, isError = false) {
 function dashboardPath(role) {
   if (role === "student") return "/student";
   if (role === "teacher") return "/teacher";
+  if (role === "admin") return "/admin-dashboard";
   return null;
 }
 
@@ -71,7 +72,7 @@ async function handleLogin(event) {
     }
     const destination = dashboardPath(user.role);
     if (!destination) {
-      setStatus("The admin interface is available at /admin.", true);
+      setStatus("This account does not have a supported dashboard.", true);
       return;
     }
 

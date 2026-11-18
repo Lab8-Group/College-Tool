@@ -7,10 +7,40 @@
     <meta name="theme-color" content="#f5f3e9" />
     <meta
       name="description"
-      content="Look at classes, grades,and manage student enrollment in Admin Dashboard."
+      content="Manage School Portal users, courses, and enrollments."
     />
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-    <!-- <script src="{{ url_for('static', filename='index.js') }}" defer></script> -->
   </head>
   <body>
+    <main class="page-shell">
+      <header class="page-heading">
+        <div>
+          <p class="eyebrow">School Portal</p>
+          <h1>Administration</h1>
+          <p class="intro">Manage users, courses, and enrollments.</p>
+        </div>
+      </header>
+
+      <section class="panel" aria-labelledby="database-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">DATABASE</p>
+            <h2 id="database-heading">Manage portal data</h2>
+          </div>
+        </div>
+        <p>Use the admin console to create, view, update, and delete records.</p>
+        <a class="button button-primary" href="/admin/">Open database manager</a>
+      </section>
+
+      <p id="logout-status" class="status-message" role="status" aria-live="polite"></p>
+      <form id="logout-form" action="{{ url_for('logout') }}" method="post">
+        <button class="button button-secondary" type="submit">Log out</button>
+      </form>
+
+      <footer class="page-footer">
+        <span>Administrator access is limited to authorized accounts.</span>
+      </footer>
+    </main>
+  </body>
+</html>
