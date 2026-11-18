@@ -37,29 +37,21 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <th scope="row">CS 106</th>
-        <td>MWF 2:00–2:50 PM</td>
-        <td>4 / 10</td>
-        <td><a class="button button-secondary" href="#cs106-roster">View roster</a></td>
-      </tr>
-      <tr>
-        <th scope="row">CS 162</th>
-        <td>TR 3:00–3:50 PM</td>
-        <td>4 / 4</td>
-        <td><a class="button button-secondary" href="#cs162-roster">View roster</a></td>
-      </tr>
-    </tbody>
+    <tbody id="class-list">
+  <tr>
+    <td colspan="4" class="table-placeholder">Loading your classes…</td>
+  </tr>
+</tbody>
   </table>
 </div>
   </section>
 
   <section class="panel" aria-labelledby="roster-heading">
     <h2 id="roster-heading">Class Roster</h2>
-    <h3 id="cs106-roster">CS 106 roster</h3>
-    <p>Rosters for each class are listed below.</p>
-    <!-- Student roster and inline grade editing go here -->
+    <h3 id="selected-course">Select a class</h3>
+<p id="roster-status" class="status-message" role="status" aria-live="polite">
+  Choose a class above to load its roster.
+</p>
 <div class="table-wrap">
   <table>
     <thead>
@@ -69,76 +61,9 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="roster-list">
       <tr>
-        <th scope="row">Aditya Ranganath</th>
-        <td class="grade-value">93</td>
-        <td>
-          <button class="button button-secondary edit-grade" type="button"
-            aria-label="Edit grade for Aditya Ranganath">Edit</button>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Yi Wen Chen</th>
-        <td class="grade-value">85</td>
-        <td>
-          <button class="button button-secondary edit-grade" type="button"
-            aria-label="Edit grade for Yi Wen Chen">Edit</button>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Nancy Little</th>
-        <td class="grade-value">57</td>
-        <td>
-          <button class="button button-secondary edit-grade" type="button"
-            aria-label="Edit grade for Nancy Little">Edit</button>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Mindy Norris</th>
-        <td class="grade-value">68</td>
-        <td>
-          <button class="button button-secondary edit-grade" type="button"
-            aria-label="Edit grade for Mindy Norris">Edit</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-    <h3 id="cs162-roster">CS 162 roster</h3>
-<div class="table-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">Student</th>
-        <th scope="col">Grade</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">Aditya Ranganath</th>
-        <td class="grade-value">99</td>
-        <td><button class="button button-secondary edit-grade" type="button"
-          aria-label="Edit grade for Aditya Ranganath">Edit</button></td>
-      </tr>
-      <tr>
-        <th scope="row">Nancy Little</th>
-        <td class="grade-value">87</td>
-        <td><button class="button button-secondary edit-grade" type="button"
-          aria-label="Edit grade for Nancy Little">Edit</button></td>
-      </tr>
-      <tr>
-        <th scope="row">Yi Wen Chen</th>
-        <td class="grade-value">92</td>
-        <td><button class="button button-secondary edit-grade" type="button"
-          aria-label="Edit grade for Yi Wen Chen">Edit</button></td>
-      </tr>
-      <tr>
-        <th scope="row">John Stuart</th>
-        <td class="grade-value">67</td>
-        <td><button class="button button-secondary edit-grade" type="button"
-          aria-label="Edit grade for John Stuart">Edit</button></td>
+        <td colspan="3" class="table-placeholder">No roster loaded.</td>
       </tr>
     </tbody>
   </table>
