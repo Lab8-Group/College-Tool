@@ -1,5 +1,6 @@
 from flask import redirect, url_for
 from flask_admin import Admin as FlaskAdmin
+from flask_admin.theme import Bootstrap4Theme
 from flask_admin.contrib.sqla import ModelView
 from wtforms import PasswordField
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
@@ -34,7 +35,8 @@ class UserView(SecureView):
 
 
 def init_admin(app):
-    admin_panel = FlaskAdmin(app, name="University Portal")
+    theme = Bootstrap4Theme(base_template="admin/portal_base.html")
+    admin_panel = FlaskAdmin(app, name="School Portal", theme=theme)
     admin_panel.add_view(UserView(Student, db.session, endpoint="students"))
     admin_panel.add_view(UserView(Teacher, db.session, endpoint="teachers"))
     admin_panel.add_view(UserView(Admin, db.session, endpoint="admin_users"))
