@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from users import db, Student, Teacher, Admin, Course, Enrollment
@@ -29,7 +30,10 @@ except ImportError:
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder=str(Path(__file__).resolve().parents[2] / "HTML"),
+)
 
 
 #ADMIN
